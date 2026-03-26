@@ -1,0 +1,475 @@
+:root {
+  color: #0f172a;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.14), transparent 28%),
+    radial-gradient(circle at top right, rgba(217, 119, 6, 0.14), transparent 22%),
+    linear-gradient(180deg, #f8fbff 0%, #f7f5ef 100%);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #0f172a;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+}
+
+.header-eyebrow {
+  color: #475569;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header-title-group h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.header-title-group p {
+  margin: 4px 0 0;
+  color: #475569;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 14px;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.main-layout.main-layout-graph-minimized .graph-section {
+  flex: 0 0 360px;
+}
+
+.main-layout.main-layout-graph-minimized .chat-panel {
+  flex: 1 1 auto;
+  max-width: none;
+}
+
+.graph-section {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  overflow: hidden;
+}
+
+.graph-section.graph-section-minimized {
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.graph-toolbar,
+.graph-meta,
+.graph-legend {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.graph-toolbar {
+  top: 20px;
+  left: 20px;
+}
+
+.graph-meta {
+  top: 20px;
+  right: 20px;
+}
+
+.graph-legend {
+  bottom: 20px;
+  left: 20px;
+  flex-wrap: wrap;
+  max-width: 68%;
+}
+
+.graph-toolbar button,
+.chat-form button {
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.graph-toolbar button {
+  padding: 10px 16px;
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.graph-toolbar button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.graph-toolbar .dark-button {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.graph-toolbar button:hover,
+.chat-form button:hover {
+  transform: translateY(-1px);
+}
+
+.graph-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.graph-minimized-note {
+  margin: 82px 20px 20px;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #334155;
+  font-family: "Trebuchet MS", sans-serif;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+}
+
+.meta-label {
+  display: block;
+  margin-bottom: 4px;
+  color: #64748b;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #334155;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.node-details-card {
+  position: absolute;
+  top: 94px;
+  left: 22px;
+  z-index: 2;
+  width: min(360px, calc(100% - 44px));
+  max-height: calc(100% - 210px);
+  overflow: auto;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.node-details-kicker {
+  margin-bottom: 8px;
+  color: #64748b;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.node-details-card h3 {
+  margin: 0 0 14px;
+  font-size: 24px;
+}
+
+.node-field {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.chat-panel {
+  display: flex;
+  flex: 0 0 420px;
+  flex-direction: column;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+}
+
+.chat-header {
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.chat-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.chat-header p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 14px;
+}
+
+.message-list {
+  flex: 1;
+  overflow: auto;
+  padding: 18px 18px 8px;
+}
+
+.message-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.message-row-user {
+  justify-content: flex-end;
+}
+
+.message-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0f172a, #334155);
+  color: #ffffff;
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: 700;
+}
+
+.message-content {
+  max-width: 82%;
+}
+
+.message-name {
+  margin-bottom: 2px;
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: 700;
+}
+
+.message-role {
+  margin-bottom: 8px;
+  color: #64748b;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 12px;
+}
+
+.message-bubble {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: #f8fafc;
+  line-height: 1.5;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+
+.message-bubble-user {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.message-evidence {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.evidence-row {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(226, 232, 240, 0.62);
+  color: #334155;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.sql-details {
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #eff6ff;
+  overflow: hidden;
+}
+
+.sql-details summary {
+  cursor: pointer;
+  padding: 10px 12px;
+  color: #1d4ed8;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 12px;
+}
+
+.sql-details pre {
+  margin: 0;
+  padding: 0 12px 12px;
+  overflow: auto;
+  white-space: pre-wrap;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+}
+
+.chat-input-area {
+  padding: 18px;
+  border-top: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.chat-status,
+.chat-error {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 13px;
+}
+
+.chat-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(241, 245, 249, 0.95);
+  color: #334155;
+}
+
+.chat-status-success {
+  background: rgba(240, 253, 244, 0.9);
+  color: #166534;
+}
+
+.chat-status-error {
+  background: rgba(254, 242, 242, 0.95);
+  color: #b91c1c;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.chat-error {
+  background: rgba(254, 226, 226, 0.96);
+  color: #b91c1c;
+}
+
+.chat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-form textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 16px;
+  resize: none;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.chat-form button {
+  align-self: flex-end;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #334155, #0f172a);
+  color: #ffffff;
+}
+
+.chat-form button:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1100px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .chat-panel {
+    flex: 0 0 auto;
+    max-width: none;
+    min-height: 360px;
+  }
+
+  .graph-section {
+    min-height: 62vh;
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  }
+}
+
+@media (max-width: 760px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .graph-toolbar,
+  .graph-meta,
+  .graph-legend {
+    position: static;
+    margin: 12px 12px 0;
+  }
+
+  .graph-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .graph-canvas {
+    flex: 1;
+    min-height: 420px;
+  }
+
+  .node-details-card {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin: 12px;
+  }
+}
