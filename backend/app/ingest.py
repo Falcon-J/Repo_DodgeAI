@@ -434,3 +434,11 @@ def coerce_value(value: Any) -> Any:
     if isinstance(value, (dict, list)):
         return json.dumps(value, ensure_ascii=True)
     return value
+
+
+if __name__ == "__main__":
+    db = rebuild_database(
+        Path("sap-o2c-data"),
+        Path("C:\\Users\\ojade\\Downloads\\DodgeAITask\\backend\\sap_o2c.sqlite3")
+    )
+    print("DB built at backend/data/sap_o2c.sqlite3")
