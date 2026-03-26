@@ -1,6 +1,6 @@
 backend/__pycache__/
 backend/.pytest_cache/
-backend/sap_o2c.sqlite3
+
 backend/*.sqlite3
 backend/*.db
 backend/venv/

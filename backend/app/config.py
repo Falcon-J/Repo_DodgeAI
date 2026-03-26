@@ -26,7 +26,7 @@ class Settings:
     app_name: str = "Context Graph + LLM Query Interface"
     backend_dir: Path = BACKEND_DIR
     project_dir: Path = backend_dir.parent
-    data_dir: Path = project_dir.parent / "sap-o2c-data"
+    data_dir: Path = project_dir / "sap-o2c-data" #data in the parent repo fix
     sqlite_path: Path = backend_dir / "sap_o2c.sqlite3"
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
     groq_model: str = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
